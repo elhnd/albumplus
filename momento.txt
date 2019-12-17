@@ -1,0 +1,23 @@
+Installation de Laravel
+composer create-project Laravel/Laravel nomProjet --prefer-dist
+
+Pour la traduction:
+svn export https://github.com/caouecs/Laravel-lang/trunk/src/fr resources/lang/fr
+puis aller sur config/app.php et modifier la valeur de 'locale'=>
+
+Installation de l'authentification: 
+    pour Laravel 5.7/5.8
+    php artisan make:authentification
+
+    pour Laravel 6:
+    composer require laravel/ui
+    php artisan ui vue --auth
+
+Faire une migration de base de donnée
+php artisan migrate 
+
+Installation de la barre de débogage
+composer require barryvdh/laravel-debugbar --dev
+
+A chaque modifier du fichier app.js, lancer
+npm run dev ou npm run watch pour un enregistrement auto
