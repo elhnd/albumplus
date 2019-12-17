@@ -67,3 +67,5 @@ On pourra insi écrire @admin dans les vues.
 Pour créer un controler:
 php artisan make:controller CategoryController --resource
 Le fait d’utiliser l’option –resource génére les 7 méthodes de base.
+
+test
