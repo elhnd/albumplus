@@ -36,3 +36,13 @@ Ajout d'un helpers ():
 
 Pour vérifier les routes existentes sur notre appli:
 php artisan route:list
+
+Pour creer un seeder c-a-d un genre de fixture
+php artisan make:seeder UsersTableSeeder
+our la migration
+php artisan migrate:fresh --seed
+
+Le slug est une version transformée du nom pour être intégrée dans une url.
+
+Pour créer un model 
+php artisan make:model Models/Category
