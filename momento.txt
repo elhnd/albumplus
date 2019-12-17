@@ -46,3 +46,24 @@ Le slug est une version transformée du nom pour être intégrée dans une url.
 
 Pour créer un model 
 php artisan make:model Models/Category
+
+Pour créer un middleware
+php artisan make:middleware Admin
+Puis déclarer le midleware dans app/Http/Kernel.php , Exemple: protected $routeMiddleware = [
+                                                                    ...
+                                                                    'admin' => \App\Http\Middleware\Admin::class,
+                                                                ];
+
+On ajoute une directive à Blade dans AppServiceProvider:
+
+public function boot()
+{
+    Blade::if('admin', function () {
+        return auth()->check() && auth()->user()->admin;
+    });
+}
+On pourra insi écrire @admin dans les vues.
+
+Pour créer un controler:
+php artisan make:controller CategoryController --resource
+Le fait d’utiliser l’option –resource génére les 7 méthodes de base.
