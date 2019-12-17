@@ -21,3 +21,18 @@ composer require barryvdh/laravel-debugbar --dev
 
 A chaque modifier du fichier app.js, lancer
 npm run dev ou npm run watch pour un enregistrement auto
+
+Créer une vue partiale pour ne pas reproduire un code HTML plusieur fois
+Créer des composants (components) pour les buttons et autres
+
+Ajout d'un helpers ():
+
+        Ajouter le code sur un fichier php,
+        Ajouter la référence dans composer.json ,Exemple : "files": [
+                                                                    "app/helpers.php"
+                                                                ]
+        Relancer composer:
+        composer dumpautoload
+
+Pour vérifier les routes existentes sur notre appli:
+php artisan route:list

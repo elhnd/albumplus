@@ -18,8 +18,8 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <?php if(auth()->guard()->guest()): ?>
-                <li class="nav-item"><a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo app('translator')->get('Connexion'); ?></a></li>
-                <li class="nav-item"><a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo app('translator')->get('Inscription'); ?></a></li>
+                <li class="nav-item<?php echo e(currentRoute(route('login'))); ?>"><a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo app('translator')->get('Connexion'); ?></a></li>
+                <li class="nav-item<?php echo e(currentRoute(route('register'))); ?>"><a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo app('translator')->get('Inscription'); ?></a></li>
             <?php else: ?>
                 <li class="nav-item">
                     <a id="logout" class="nav-link" href="<?php echo e(route('logout')); ?>"><?php echo app('translator')->get('Déconnexion'); ?></a>

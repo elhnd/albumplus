@@ -5239,8 +5239,8 @@ input[type=button].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  border: 4px solid rgba(255, 242, 242, 0.3);
+  border-radius: 0.3rem;
 }
 
 .card > hr {
@@ -5249,13 +5249,13 @@ input[type=button].btn-block {
 }
 
 .card > .list-group:first-child .list-group-item:first-child {
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
 }
 
 .card > .list-group:last-child .list-group-item:last-child {
-  border-bottom-right-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
 }
 
 .card-body {
@@ -5290,11 +5290,11 @@ input[type=button].btn-block {
   padding: 0.75rem 1.25rem;
   margin-bottom: 0;
   background-color: rgba(0, 0, 0, 0.03);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  border-bottom: 4px solid rgba(255, 242, 242, 0.3);
 }
 
 .card-header:first-child {
-  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+  border-radius: calc(0.3rem - 4px) calc(0.3rem - 4px) 0 0;
 }
 
 .card-header + .list-group .list-group-item:first-child {
@@ -5304,11 +5304,11 @@ input[type=button].btn-block {
 .card-footer {
   padding: 0.75rem 1.25rem;
   background-color: rgba(0, 0, 0, 0.03);
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  border-top: 4px solid rgba(255, 242, 242, 0.3);
 }
 
 .card-footer:last-child {
-  border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
+  border-radius: 0 0 calc(0.3rem - 4px) calc(0.3rem - 4px);
 }
 
 .card-header-tabs {
@@ -5341,14 +5341,14 @@ input[type=button].btn-block {
 
 .card-img,
 .card-img-top {
-  border-top-left-radius: calc(0.25rem - 1px);
-  border-top-right-radius: calc(0.25rem - 1px);
+  border-top-left-radius: calc(0.3rem - 4px);
+  border-top-right-radius: calc(0.3rem - 4px);
 }
 
 .card-img,
 .card-img-bottom {
-  border-bottom-right-radius: calc(0.25rem - 1px);
-  border-bottom-left-radius: calc(0.25rem - 1px);
+  border-bottom-right-radius: calc(0.3rem - 4px);
+  border-bottom-left-radius: calc(0.3rem - 4px);
 }
 
 .card-deck .card {
@@ -5469,7 +5469,7 @@ input[type=button].btn-block {
 
 .accordion > .card > .card-header {
   border-radius: 0;
-  margin-bottom: -1px;
+  margin-bottom: -4px;
 }
 
 .breadcrumb {
