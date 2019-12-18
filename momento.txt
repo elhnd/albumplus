@@ -93,3 +93,5 @@ sonar.exclusions=app/Providers/**
 
 # Additional parameters
 #sonar.my.property=value
+
+test pour le build automatique aprés un push
