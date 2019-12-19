@@ -76,3 +76,7 @@ php artisan make:listener NameSaving
 
 Pour créer un événement:
 php artisan make:event NameSaving
+
+
+Pour manipuler les images, en particulier créer la version basse résolution 
+composer require intervention/image

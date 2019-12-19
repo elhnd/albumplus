@@ -12,8 +12,8 @@ return [
     | based disks are available to your application. Just store away!
     |
     */
-
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    //pour avoir les fichiers dans public
+    'default' => env('FILESYSTEM_DRIVER', 'public'),
 
     /*
     |--------------------------------------------------------------------------
