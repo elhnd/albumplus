@@ -134,6 +134,9 @@ return [
     |
     */
 
+    //Pagination par défaut
+    'pagination' => 8,
+
     'providers' => [
 
         /*

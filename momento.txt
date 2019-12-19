@@ -80,3 +80,6 @@ php artisan make:event NameSaving
 
 Pour manipuler les images, en particulier créer la version basse résolution 
 composer require intervention/image
+
+Pour installation d'une light box
+npm i magnific-popup -D

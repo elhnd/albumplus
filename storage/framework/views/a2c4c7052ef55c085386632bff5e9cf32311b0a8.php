@@ -17,6 +17,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle
+                        <?php if(isset($category)): ?>
+                            <?php echo e(currentRoute(route('category', $category->slug))); ?>
+
+                        <?php endif; ?>
+                            " href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php echo app('translator')->get('Catégories'); ?>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
+                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <a class="dropdown-item" href="<?php echo e(route('category', $category->slug)); ?>"><?php echo e($category->name); ?></a>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
+                </li>
                 <?php if (\Illuminate\Support\Facades\Blade::check('admin')): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle<?php echo e(currentRoute(
