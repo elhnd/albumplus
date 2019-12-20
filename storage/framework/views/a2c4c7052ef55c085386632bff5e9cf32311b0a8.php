@@ -72,6 +72,12 @@
                 <li class="nav-item<?php echo e(currentRoute(route('login'))); ?>"><a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo app('translator')->get('Connexion'); ?></a></li>
                 <li class="nav-item<?php echo e(currentRoute(route('register'))); ?>"><a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo app('translator')->get('Inscription'); ?></a></li>
                 <?php else: ?>
+                    <li class="nav-item<?php echo e(currentRoute(
+                        route('profile.edit', auth()->id()),
+                        route('profile.show', auth()->id())
+                            )); ?>">
+                        <a class="nav-link" href="<?php echo e(route('profile.edit', auth()->id())); ?>"><?php echo app('translator')->get('Profil'); ?></a>
+                    </li>
                     <li class="nav-item">
                         <a id="logout" class="nav-link" href="<?php echo e(route('logout')); ?>"><?php echo app('translator')->get('Déconnexion'); ?></a>
                         <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="hide">

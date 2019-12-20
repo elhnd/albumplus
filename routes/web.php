@@ -23,6 +23,12 @@ Route::middleware('admin')->group(function () {
 });
 
 Route::middleware ('auth', 'verified')->group (function () {
+
+    Route::resource ('profile', 'ProfileController', [
+        'only' => ['edit', 'update', 'destroy', 'show'],
+        'parameters' => ['profile' => 'user']
+    ]);
+    
     Route::resource ('image', 'ImageController', [
         'only' => ['create', 'store', 'destroy', 'update']
     ]);

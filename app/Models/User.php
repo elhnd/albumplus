@@ -76,4 +76,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return json_decode ($value);
     }
+
+    public function getPaginationAttribute()
+    {
+        return $this->settings->pagination;
+    }
 }
