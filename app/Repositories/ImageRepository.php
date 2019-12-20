@@ -53,4 +53,11 @@ class ImageRepository
             $query->whereSlug($slug);
         })->paginate(config('app.pagination'));
     }
+
+    public function getImagesForUser($id)
+    {
+        return Image::latestWithUser ()->whereHas ('user', function ($query) use ($id) {
+            $query->whereId ($id);
+        })->paginate(config('app.pagination'));
+    }
 }

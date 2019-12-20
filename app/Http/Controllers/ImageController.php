@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Repositories\ {
     ImageRepository, CategoryRepository
 };
+use App\Models\{User, Image};
+
 
 class ImageController extends Controller
 {
@@ -78,5 +80,46 @@ class ImageController extends Controller
         $images = $this->imageRepository->getImagesForCategory ($slug);
 
         return view ('home', compact ('category', 'images'));
+    }
+
+    public function user(User $user)
+    {
+        $images = $this->imageRepository->getImagesForUser ($user->id);
+        return view ('home', compact ('user', 'images'));
+    }
+
+    public function destroy(Image $image)
+    {
+        $this->authorize ('manage', $image);
+        $image->delete ();
+        return back ();
+    }
+
+    public function descriptionUpdate(Request $request, Image $image)
+    {
+        $this->authorize ('manage', $image);
+        $request->validate ([
+            'description' => 'nullable|string|max:255'
+        ]);
+        $image->description = $request->description;
+        $image->save();
+        return $image;
+    }
+
+    public function update(Request $request, Image $image)
+    {
+        $this->authorize('manage', $image);
+        $image->category_id = $request->category_id;
+        $image->save();
+        return back()->with('updated', __('La catégorie a bien été changée !'));
+    }
+
+
+    public function adultUpdate(Request $request, Image $image)
+    {
+        $this->authorize ('manage', $image);
+        $image->adult = $request->adult == 'true';
+        $image->save();
+        return response ()->json();
     }
 }

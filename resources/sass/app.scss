@@ -43,3 +43,11 @@ html, body {
     grid-area: center;
     align-self: center;
 }
+
+a:hover {
+  text-decoration: none;
+}
+.star-rating {
+  direction: rtl;
+  display: block;
+}

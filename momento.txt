@@ -83,3 +83,9 @@ composer require intervention/image
 
 Pour installation d'une light box
 npm i magnific-popup -D
+
+Pour ajouter une autorisation pour verrouiller une action
+php artisan make:policy ImagePolicy
+Aller dans ImagePolicy pour déclarer la fonction pour l'autorisation
+Puis dans AuthServiceProvider pour appeler la calsse ImagePolicy dans la variable $policies
+En fin dans le controler ajouter ceci $this->authorize ('manage', $image); sur la methode concernée
