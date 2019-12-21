@@ -95,14 +95,14 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         if($request->maintenance) {
             Artisan::call ('down', $request->ip ? ['--allow' => $request->ip()] : []);
         } else {
             Artisan::call ('up');
         }
-        
+
         return redirect()->route('maintenance.index')->with ('ok', __ ('Le mode a bien été actualisé.'));
     }
 
