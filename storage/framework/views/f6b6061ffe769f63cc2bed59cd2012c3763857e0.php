@@ -12,16 +12,24 @@
 
             </div>
         <?php endif; ?>
+
         <?php if(isset($category)): ?>
             <h2 class="text-title mb-3"><?php echo e($category->name); ?></h2>
         <?php endif; ?>
+
         <?php if(isset($user)): ?>
             <h2 class="text-title mb-3"><?php echo e(__('Photos de ') . $user->name); ?></h2>
         <?php endif; ?>
+
+        <?php if(isset($album)): ?>
+            <h2 class="text-title mb-3"><?php echo e($album->name); ?></h2>
+        <?php endif; ?>
+
         <div class="d-flex justify-content-center">
             <?php echo e($images->links()); ?>
 
         </div>
+
         <div class="card-columns">
             <?php $__currentLoopData = $images; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="card <?php if($image->adult): ?> border-danger <?php endif; ?>" id="image<?php echo e($image->id); ?>">
@@ -55,6 +63,7 @@
                                 <i class="fa fa-cog"></i>
                                 </a>
                                 <span class="menuIcons" style="display: none">
+
                                     <a class="form-delete text-danger"
                                         href="<?php echo e(route('image.destroy', $image->id)); ?>"
                                         data-toggle="tooltip"
@@ -68,6 +77,7 @@
                                         title="<?php echo app('translator')->get('Gérer la description'); ?>">
                                         <i class="fa fa-comment"></i>
                                     </a>
+
                                     <a class="category-edit"
                                         data-id="<?php echo e($image->category_id); ?>"
                                         href="<?php echo e(route('image.update', $image->id)); ?>"
@@ -75,12 +85,21 @@
                                         title="<?php echo app('translator')->get('Changer de catégorie'); ?>">
                                         <i class="fa fa-edit"></i>
                                     </a>
+
                                     <a class="adult-edit"
                                         href="<?php echo e(route('image.adult', $image->id)); ?>"
                                         data-toggle="tooltip"
                                         title="<?php echo app('translator')->get('Changer de statut'); ?>">
                                         <i class="fa <?php if($image->adult): ?> fa-graduation-cap <?php else: ?> fa-child <?php endif; ?>"></i>
                                     </a>
+
+                                    <a class="albums-manage"
+                                        href="<?php echo e(route('image.albums', $image->id)); ?>"
+                                        data-toggle="tooltip"
+                                        title="<?php echo app('translator')->get('Gérer les albums'); ?>">
+                                        <i class="fa fa-folder-open"></i>
+                                    </a>
+                                    
                                 </span>
                                 <form action="<?php echo e(route('image.destroy', $image->id)); ?>" method="POST" class="hide">
                                     <?php echo csrf_field(); ?>
@@ -136,6 +155,25 @@
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
+                            <button type="submit" class="btn btn-primary"><?php echo app('translator')->get('Envoyer'); ?></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editAlbums" tabindex="-1" role="dialog" aria-labelledby="albumLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="albumLabel"><?php echo app('translator')->get("Gestion des albums pour l'image"); ?></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="manageAlbums" action="" method="POST">
+                            <div class="form-group" id="listeAlbums"></div>
                             <button type="submit" class="btn btn-primary"><?php echo app('translator')->get('Envoyer'); ?></button>
                         </form>
                     </div>
@@ -283,6 +321,45 @@
                 .fail(() => {
                     swallAlertServer()
                 })
+            })
+
+            $('a.albums-manage').click((e) => {
+                e.preventDefault()
+                let that = $(e.currentTarget)
+                that.tooltip('hide')
+                that.children().removeClass('fa-folder-open').addClass('fa-cog fa-spin')
+                e.preventDefault()
+                $.get(that.attr('href'))
+                    .done((data) => {
+                        that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
+                        $('#listeAlbums').html(data)
+                        $('#manageAlbums').attr('action', that.attr('href'))
+                        $('#editAlbums').modal('show')
+                    })
+                    .fail(() => {
+                        that.children().addClass('fa-folder-open').removeClass('fa-cog fa-spin')
+                        swallAlertServer()
+                    })
+            })
+
+            $('#manageAlbums').submit((e) => {
+                e.preventDefault()
+                let that = $(e.currentTarget)
+                $.ajax({
+                    method: 'put',
+                    url: that.attr('action'),
+                    data: that.serialize()
+                })
+                    .done((data) => {
+                        if(data === 'reload') {
+                            location.reload();
+                        } else {
+                            $('#editAlbums').modal('hide')
+                        }
+                    })
+                    .fail(() => {
+                        swallAlertServer()
+                    })
             })
         })
     </script>

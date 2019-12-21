@@ -32,6 +32,26 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </li>
+
+                <?php if(isset($albums)): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle
+                            <?php if(isset($album)): ?>
+                                <?php echo e(currentRoute(route('album', $album->slug))); ?>
+
+                            <?php endif; ?>
+                            " href="#" id="navbarDropdownAlbum" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <?php echo app('translator')->get('Albums'); ?>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownAlbum">
+                            <?php $__currentLoopData = $albums; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $album): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <a class="dropdown-item"
+                                href="<?php echo e(route('album', $album->slug)); ?>"><?php echo e($album->name); ?></a>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </div>
+                    </li>
+                <?php endif; ?>
+
                 <?php if (\Illuminate\Support\Facades\Blade::check('admin')): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle<?php echo e(currentRoute(
@@ -52,11 +72,13 @@
                         </div>
                     </li>
                 <?php endif; ?>
+                
                 <?php if(auth()->guard()->check()): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle<?php echo e(currentRoute(
                                             route('album.create'),
-                                            route('image.create')
+                                            route('image.create'),
+                                            route('album.index')
                                         )); ?>"
                             href="#" id="navbarDropdownGestAlbum" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
@@ -68,6 +90,9 @@
                             </a>
                             <a class="dropdown-item" href="<?php echo e(route('album.create')); ?>">
                                 <i class="fas fa-folder-open fa-lg"></i> <?php echo app('translator')->get('Ajouter un album'); ?>
+                            </a>
+                            <a class="dropdown-item" href="<?php echo e(route('album.index')); ?>">
+                                <i class="fas fa-wrench fa-lg"></i> <?php echo app('translator')->get('Gérer les albums'); ?>
                             </a>
                         </div>
                     </li>

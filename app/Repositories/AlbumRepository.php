@@ -15,4 +15,14 @@ class AlbumRepository extends BaseRepository
     {
         $user->albums ()->create($inputs);
     }
+
+    public function getAlbums($user)
+    {
+        return $user->albums()->get();
+    }
+
+    public function getAlbumsWithImages($user)
+    {
+        return $user->albums()->with('images')->get();
+    }
 }
