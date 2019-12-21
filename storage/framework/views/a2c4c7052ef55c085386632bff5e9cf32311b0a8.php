@@ -53,24 +53,28 @@
                 <?php endif; ?>
 
                 <?php if (\Illuminate\Support\Facades\Blade::check('admin')): ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle<?php echo e(currentRoute(
-                                                route('category.create'), 
-                                                route('category.index'),
-                                                route('category.edit', request()->category?: 0)
-                                            )); ?>" href="#" id="navbarDropdownGestCat" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <?php echo app('translator')->get('Administration'); ?>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle<?php echo e(currentRoute(
+                                            route('category.create'),
+                                            route('category.index'),
+                                            route('category.edit', request()->category?: 0),
+                                            route('orphans.index')
+                                        )); ?>" href="#" id="navbarDropdownGestCat" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <?php echo app('translator')->get('Administration'); ?>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownGestCat">
+                        <a class="dropdown-item" href="<?php echo e(route('category.create')); ?>">
+                            <i class="fas fa-plus fa-lg"></i> <?php echo app('translator')->get('Ajouter une catégorie'); ?>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownGestCat">
-                            <a class="dropdown-item" href="<?php echo e(route('category.create')); ?>">
-                                <i class="fas fa-plus fa-lg"></i> <?php echo app('translator')->get('Ajouter une catégorie'); ?>
-                            </a>
-                            <a class="dropdown-item" href="<?php echo e(route('category.index')); ?>">
-                                <i class="fas fa-wrench fa-lg"></i> <?php echo app('translator')->get('Gérer les catégories'); ?>
-                            </a>
-                        </div>
-                    </li>
+                        <a class="dropdown-item" href="<?php echo e(route('category.index')); ?>">
+                            <i class="fas fa-wrench fa-lg"></i> <?php echo app('translator')->get('Gérer les catégories'); ?>
+                        </a>
+                        <a class="dropdown-item" href="<?php echo e(route('orphans.index')); ?>">
+                            <i class="fas fa-images fa-lg"></i> <?php echo app('translator')->get('Photos orphelines'); ?>
+                        </a>
+                    </div>
+                </li>
                 <?php endif; ?>
                 
                 <?php if(auth()->guard()->check()): ?>

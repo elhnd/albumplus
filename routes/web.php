@@ -17,9 +17,15 @@ Auth::routes(['verify' => true]);
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::middleware('admin')->group(function () {
+    
     Route::resource ('category', 'CategoryController', [
         'except' => 'show'
     ]);
+
+    Route::name ('orphans.')->prefix('orphans')->group(function () {
+        Route::name ('index')->get ('/', 'AdminController@orphans');
+        Route::name ('destroy')->delete ('/', 'AdminController@destroy');
+    });
 });
 
 Route::middleware ('auth', 'verified')->group (function () {

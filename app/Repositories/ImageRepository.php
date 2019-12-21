@@ -72,4 +72,23 @@ class ImageRepository
     {
         return $image->albums()->where('albums.id', $album->id)->doesntExist();
     }
+
+    public function getOrphans()
+    {
+        return collect (Storage::files ('images'))->transform(function ($item) {
+            return basename($item);
+        })->diff (Image::select ('name')->pluck ('name'));
+    }
+
+    public function destroyOrphans()
+    {
+        $orphans = $this->getOrphans ();
+        
+        foreach ($orphans as $orphan) {
+            Storage::delete ([
+                'images/' . $orphan,
+                'thumbs/' . $orphan,
+            ]);
+        }
+    }
 }
