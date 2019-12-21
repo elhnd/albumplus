@@ -81,4 +81,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->settings->pagination;
     }
+
+    public function albums()
+    {
+        return $this->hasMany (Album::class);
+    }
 }

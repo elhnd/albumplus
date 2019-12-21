@@ -54,14 +54,20 @@
                 <?php endif; ?>
                 <?php if(auth()->guard()->check()): ?>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle<?php echo e(currentRoute(route('image.create'))); ?>"
-                        href="#" id="navbarDropdownGestAlbum" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                            <?php echo app('translator')->get('Gestion'); ?>
+                        <a class="nav-link dropdown-toggle<?php echo e(currentRoute(
+                                            route('album.create'),
+                                            route('image.create')
+                                        )); ?>"
+                            href="#" id="navbarDropdownGestAlbum" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                                <?php echo app('translator')->get('Gestion'); ?>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownGestAlbum">
                             <a class="dropdown-item" href="<?php echo e(route('image.create')); ?>">
                                 <i class="fas fa-images fa-lg"></i> <?php echo app('translator')->get('Ajouter une image'); ?>
+                            </a>
+                            <a class="dropdown-item" href="<?php echo e(route('album.create')); ?>">
+                                <i class="fas fa-folder-open fa-lg"></i> <?php echo app('translator')->get('Ajouter un album'); ?>
                             </a>
                         </div>
                     </li>
