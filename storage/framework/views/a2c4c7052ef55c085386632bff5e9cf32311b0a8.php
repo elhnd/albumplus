@@ -58,7 +58,9 @@
                                             route('category.create'),
                                             route('category.index'),
                                             route('category.edit', request()->category?: 0),
-                                            route('orphans.index')
+                                            route('orphans.index'),
+                                            route('maintenance.index'),
+                                            route('user.index')
                                         )); ?>" href="#" id="navbarDropdownGestCat" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <?php echo app('translator')->get('Administration'); ?>
@@ -72,6 +74,12 @@
                         </a>
                         <a class="dropdown-item" href="<?php echo e(route('orphans.index')); ?>">
                             <i class="fas fa-images fa-lg"></i> <?php echo app('translator')->get('Photos orphelines'); ?>
+                        </a>
+                        <a class="dropdown-item" href="<?php echo e(route('maintenance.index')); ?>">
+                            <i class="fas fa-cogs fa-lg"></i> <?php echo app('translator')->get('Mode maintenance'); ?>
+                        </a>
+                        <a class="dropdown-item" href="<?php echo e(route('user.index')); ?>">
+                            <i class="fas fa-users fa-lg"></i> <?php echo app('translator')->get('Utilisateurs'); ?>
                         </a>
                     </div>
                 </li>
@@ -107,9 +115,17 @@
                 <li class="nav-item<?php echo e(currentRoute(route('login'))); ?>"><a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo app('translator')->get('Connexion'); ?></a></li>
                 <li class="nav-item<?php echo e(currentRoute(route('register'))); ?>"><a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo app('translator')->get('Inscription'); ?></a></li>
                 <?php else: ?>
+                    <?php if (\Illuminate\Support\Facades\Blade::check('maintenance')): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo e(route('maintenance.index')); ?>" data-toggle="tooltip" title="<?php echo app('translator')->get('Mode maintenance'); ?>">
+                                <span class="fas fa-exclamation-circle  fa-lg" style="color: red;">
+                                </span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                     <li class="nav-item<?php echo e(currentRoute(
-                        route('profile.edit', auth()->id()),
-                        route('profile.show', auth()->id())
+                                route('profile.edit', auth()->id()),
+                                route('profile.show', auth()->id())
                             )); ?>">
                         <a class="nav-link" href="<?php echo e(route('profile.edit', auth()->id())); ?>"><?php echo app('translator')->get('Profil'); ?></a>
                     </li>

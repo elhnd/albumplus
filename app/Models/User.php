@@ -37,6 +37,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'email_verified_at',
+    ];
+
     /**
      * Get the images.
      */
@@ -86,4 +92,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany (Album::class);
     }
+
+    public function setAdultAttribute($value)
+    {
+        $this->attributes['settings'] = json_encode ([
+            'adult' => $value,
+            'pagination' => $this->settings->pagination
+        ]);
+    }
+    
 }
